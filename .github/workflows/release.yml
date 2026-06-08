@@ -25,28 +25,13 @@ jobs:
         run: ./gradlew test
 
       - name: Build release APK
-        run: ./gradlew assembleRelease
-
-      - name: Sign APK
-        uses: r0adkll/sign-android-release@v1
-        id: sign_apk
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-        continue-on-error: true
+        run: ./gradlew assembleDebug
 
       - name: Rename APK
         run: |
           TAG=${GITHUB_REF#refs/tags/}
-          if [ -f "${{ steps.sign_apk.outputs.signedReleaseFile }}" ]; then
-            cp "${{ steps.sign_apk.outputs.signedReleaseFile }}" "FlexDash-${TAG}.apk"
-          else
-            cp app/build/outputs/apk/release/app-release-unsigned.apk "FlexDash-${TAG}.apk"
-          fi
-          echo "APK_PATH=FlexDash-${TAG}.apk" >> $GITHUB_ENV
+          cp app/build/outputs/apk/debug/app-debug.apk "FlexDash-${TAG}.apk"
+          echo "APK_NAME=FlexDash-${TAG}.apk" >> $GITHUB_ENV
           echo "TAG=${TAG}" >> $GITHUB_ENV
 
       - name: Create GitHub Release
@@ -62,7 +47,7 @@ jobs:
             - Quick-launch Chrome Custom Tabs for Jellyfin, Radarr, Sonarr, qBittorrent, and Prowlarr
 
             ### Install
-            Download `FlexDash-${{ env.TAG }}.apk` and sideload on Android.
-          files: ${{ env.APK_PATH }}
+            Download `${{ env.APK_NAME }}` below and sideload on Android.
+          files: ${{ env.APK_NAME }}
           draft: false
           prerelease: false
