@@ -44,7 +44,17 @@
 
 ## 📥 Install
 
+### Phone / Tablet
 Download the latest APK from [Releases](https://github.com/dustinmcafee/FlexDash/releases/latest), enable **Install unknown apps** for your browser, and sideload.
+
+### Android TV / Google TV / Fire TV
+Runs on any Android-based TV device on **Android 8.0+** (Nvidia Shield, Chromecast with Google TV, Fire TV, Android smart TVs). Non-Android TVs (Samsung Tizen, LG webOS, Roku) are not supported.
+
+1. Enable **Developer options → USB/network debugging** on the TV.
+2. Install over ADB: `adb connect <tv-ip>` then `adb install app-debug.apk` — or sideload with an app like *Downloader* / *Send Files to TV*.
+3. FlexDash appears in the TV home-screen app row and is fully D-pad navigable. The focused service card shows a green border; press the center button to launch.
+
+> A Custom Tabs–capable browser (e.g. Chrome) must be installed on the TV to open services.
 
 ---
 

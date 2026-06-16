@@ -7,4 +7,5 @@
     <color name="toolbar_color">#1E1E1E</color>
     <color name="vpn_on">#4CAF50</color>
     <color name="vpn_off">#FFA726</color>
+    <color name="focus_highlight">#4CAF50</color>
 </resources>

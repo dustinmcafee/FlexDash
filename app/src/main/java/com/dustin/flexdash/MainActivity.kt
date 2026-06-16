@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         val container = binding.servicesContainer
         container.removeAllViews()
 
-        services.forEach { service ->
+        services.forEachIndexed { index, service ->
             val card = layoutInflater.inflate(R.layout.service_card, container, false)
             card.findViewById<TextView>(R.id.serviceName).text = "${service.emoji} ${service.name}"
             card.findViewById<TextView>(R.id.serviceDesc).text = service.description
@@ -67,6 +67,8 @@ class MainActivity : AppCompatActivity() {
                 openService(service)
             }
             container.addView(card)
+            // Give the D-pad a starting point on Android TV
+            if (index == 0) card.requestFocus()
         }
     }
 
